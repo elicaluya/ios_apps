@@ -13,6 +13,7 @@
 		A61B11D825C8F41000E1F22E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61B11D625C8F41000E1F22E /* Main.storyboard */; };
 		A61B11DA25C8F43E00E1F22E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61B11D925C8F43E00E1F22E /* Assets.xcassets */; };
 		A61B11DD25C8F43E00E1F22E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61B11DB25C8F43E00E1F22E /* LaunchScreen.storyboard */; };
+		A6F8941D25DB0DA20019FDC8 /* DVRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F8941C25DB0DA20019FDC8 /* DVRViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A61B11D925C8F43E00E1F22E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A61B11DC25C8F43E00E1F22E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A61B11DE25C8F43E00E1F22E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6F8941C25DB0DA20019FDC8 /* DVRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DVRViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				A61B11D225C8F41000E1F22E /* SceneDelegate.swift */,
 				A61B11D425C8F41000E1F22E /* ViewController.swift */,
 				A61B11D625C8F41000E1F22E /* Main.storyboard */,
+				A6F8941C25DB0DA20019FDC8 /* DVRViewController.swift */,
 				A61B11D925C8F43E00E1F22E /* Assets.xcassets */,
 				A61B11DB25C8F43E00E1F22E /* LaunchScreen.storyboard */,
 				A61B11DE25C8F43E00E1F22E /* Info.plist */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A61B11D525C8F41000E1F22E /* ViewController.swift in Sources */,
+				A6F8941D25DB0DA20019FDC8 /* DVRViewController.swift in Sources */,
 				A61B11D125C8F41000E1F22E /* AppDelegate.swift in Sources */,
 				A61B11D325C8F41000E1F22E /* SceneDelegate.swift in Sources */,
 			);
