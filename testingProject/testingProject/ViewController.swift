@@ -78,10 +78,11 @@ class ViewController: UIViewController {
             // add values to list
             tcList.append(TestClass(id: String(id), brand: String(brand), model: String(model), colorway: String(colorway)))
         }
+        // Reading through list and displaying the item
         var text = ""
         for i in 0..<tcList.count {
-            let item = tcList[i]
-            text += "id = \(item.id) brand = \(item.brand) model = \(item.model) cw = \(item.colorway)"
+            let item: TestClass = tcList[i]
+            text += "id = \(item.id!) brand = \(item.brand!) model = \(item.model!) cw = \(item.colorway!)"
         }
         textOutlet.text = text
     }
