@@ -538,15 +538,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveAction:" destination="083-RJ-0kJ" eventType="touchUpInside" id="qa4-L4-DG6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lV6-Tq-iIb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Configuration" image="paperclip" catalog="system" id="tMw-8A-hBZ"/>
+                    <tabBarItem key="tabBarItem" title="Configuration" image="gearshape" catalog="system" id="tMw-8A-hBZ"/>
                     <connections>
                         <outlet property="channelNum" destination="keR-3H-cDv" id="edJ-wc-15S"/>
                         <outlet property="channelStepper" destination="ZbU-oT-oUo" id="bUZ-wF-GNC"/>
+                        <outlet property="favSegment" destination="MUL-CQ-daF" id="Blw-v5-xgI"/>
                         <outlet property="labelOutlet" destination="RVM-FN-o4E" id="HzV-ve-4cF"/>
                     </connections>
                 </viewController>
@@ -556,7 +560,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="play.tv.fill" catalog="system" width="128" height="97"/>
         <image name="tv" catalog="system" width="128" height="97"/>
         <systemColor name="systemBackgroundColor">

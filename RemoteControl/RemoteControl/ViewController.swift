@@ -42,6 +42,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     
     
+    var favChannel1 = ""
+    var favChannel2 = ""
+    var favChannel3 = ""
+    var favChannel4 = ""
+    
+    
     // Function to power on and off the remote
     @IBAction func switchToggled(_ sender: UISwitch) {
         powerLabel.text = (sender.isOn ? "ON" : "OFF")
@@ -90,19 +96,15 @@ class ViewController: UIViewController {
     
     // Changing to channel of favorites saved using segmented control
     @IBAction func favChannel(_ sender: UISegmentedControl) {
-        if let channel = sender.titleForSegment(at: sender.selectedSegmentIndex){
-            if channel == "ABC" {
-                channelLabel.text = "7"
-            }
-            else if channel == "NBC" {
-                channelLabel.text = "11"
-            }
-            else if channel == "PBS" {
-                channelLabel.text = "22"
-            }
-            else if channel == "FOX" {
-                channelLabel.text = "2"
-            }
+        let channelNum = sender.selectedSegmentIndex
+        if channelNum == 0 {
+            channelLabel.text = String(favChannel1)
+        } else if channelNum == 1 {
+            channelLabel.text = String(favChannel2)
+        } else if channelNum == 2 {
+            channelLabel.text = String(favChannel3)
+        } else if channelNum == 3 {
+            channelLabel.text = String(favChannel4)
         }
     }
     
@@ -165,6 +167,10 @@ class ViewController: UIViewController {
         powerLabel.text = "ON"
         powerSwitch.setOn(true, animated: true)
         volumeSlider.setValue(50, animated: true)
+        favChannel1 = "7"
+        favChannel2 = "11"
+        favChannel3 = "22"
+        favChannel4 = "2"
     }
 
 
