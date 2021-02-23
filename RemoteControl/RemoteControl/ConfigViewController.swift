@@ -35,7 +35,7 @@ class ConfigViewController: UIViewController {
         reset()
     }
     
-    
+    // Changing the saved configuration on the remote
     @IBAction func saveAction(_ sender: UIButton) {
         if validLabel() {
             let tvSegment = self.tabBarController!.viewControllers![0] as! ViewController
@@ -53,6 +53,7 @@ class ConfigViewController: UIViewController {
         }
     }
     
+    // Method to reset the page
     func reset(){
         favSegment.selectedSegmentIndex = 0
         labelOutlet.text = ""
@@ -60,6 +61,7 @@ class ConfigViewController: UIViewController {
         channelStepper.value = 1
     }
     
+    // Method to check if the entry is valid and throw appropriate alert
     func validLabel() -> Bool {
         let entry = labelOutlet.text
         if entry!.count < 1 || entry!.count > 4 {
