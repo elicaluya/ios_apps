@@ -150,7 +150,7 @@ class TableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = member.stageName
-        cell.detailTextLabel?.text = "Sub-Unit: \(member.unit.rawValue)"
+        cell.detailTextLabel?.text = "Debut: \(member.debut), Sub-Unit: \(member.unit.rawValue)"
         return cell
     }
     

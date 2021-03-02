@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var animal: UILabel!
     @IBOutlet weak var memberPic: UIImageView!
     
+    // Member variable used for pulling info
     var member: Member?
     
     // Populate the labels and ImageView with info from the corresponding member
@@ -26,8 +27,8 @@ class DetailViewController: UIViewController {
             name.text = m.stageName
             fullName.text = "Full Name: \(m.lastName) \(m.firstName)"
             birthday.text = "Birthday: \(m.birthday)"
-            debut.text = "Debuted: \(m.debut)"
-            subunit.text = "Sub Unit: \(m.unit.rawValue)"
+            debut.text = "Debut: \(m.debut)"
+            subunit.text = "Sub-Unit: \(m.unit.rawValue)"
             color.text = "Representative Color: \(m.color)"
             animal.text = "Representative Animal: \(m.animal)"
             memberPic.load(url: URL(string: m.pic)!)
