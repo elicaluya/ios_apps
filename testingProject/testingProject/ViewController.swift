@@ -15,20 +15,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var textOutlet: UITextView!
     
     
-    let url = "https://elijah-caluya-web.s3-us-west-1.amazonaws.com/PersonalWebsite/img/androidapp_screenshot.PNG"
-
-    let url2 = "https://elijah-caluya-web.s3-us-west-1.amazonaws.com/PersonalWebsite/img/quote_screenshot.PNG"
+    let url = "https://shoe-images-ios.s3-us-west-1.amazonaws.com/"
+    
+    let brand1 = "air_jordan"
+    let brand2 = "nike"
+    let shoe1 = "aj_1_black_toe.png"
+    let shoe2 = "nike_air_yeezy_1_blink.png"
+    
+    
+    @IBAction func getImage(_ sender: UIButton) {
+        let urlFull = "\(url)\(brand1)/\(shoe1)"
+        urlImage.load(url: URL(string: urlFull)!)
+    }
     
     
     // Testing image download and viewing functionality
     @IBAction func getSecondImage(_ sender: UIButton) {
-        urlImage.load(url: URL(string: url2)!)
+        let urlFull = "\(url)\(brand2)/\(shoe2)"
+        urlImage.load(url: URL(string: urlFull)!)
     }
-    
-    @IBAction func getImage(_ sender: UIButton) {
-        urlImage.load(url: URL(string: url)!)
-    }
-    
+
     
     // Testing SQL functionality
     var db: OpaquePointer?
