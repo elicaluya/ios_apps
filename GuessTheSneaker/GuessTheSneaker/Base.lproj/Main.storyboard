@@ -59,10 +59,10 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="65.625"/>
         </scene>
-        <!--View Controller-->
+        <!--Gameplay View Controller-->
         <scene sceneID="Vch-3n-TiL">
             <objects>
-                <viewController id="z0w-pF-Gfj" sceneMemberID="viewController">
+                <viewController id="z0w-pF-Gfj" customClass="GameplayViewController" customModule="GuessTheSneaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wca-3z-bkF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,11 +74,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqH-8v-c5E">
+                                <rect key="frame" x="0.0" y="783" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Quit" id="lNZ-aU-Egu">
+                                        <connections>
+                                            <action selector="quitGame:" destination="z0w-pF-Gfj" id="bv7-eV-n1f"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w44-S1-PHq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="BzT-YJ-Vl7"/>
+                    <connections>
+                        <outlet property="quitButton" destination="lNZ-aU-Egu" id="hnp-Y9-qro"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgr-or-A1S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

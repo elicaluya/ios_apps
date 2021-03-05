@@ -13,6 +13,9 @@
 		A6C99B0925EF70B500A64544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C99B0725EF70B500A64544 /* Main.storyboard */; };
 		A6C99B0B25EF70B700A64544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C99B0A25EF70B700A64544 /* Assets.xcassets */; };
 		A6C99B0E25EF70B700A64544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C99B0C25EF70B700A64544 /* LaunchScreen.storyboard */; };
+		A6C99B1A25F0AD8300A64544 /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C99B1925F0AD8300A64544 /* Shoe.swift */; };
+		A6C99B1E25F2D93700A64544 /* shoe_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = A6C99B1D25F2D93700A64544 /* shoe_data.txt */; };
+		A6C99B2125F2ECF400A64544 /* GameplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C99B2025F2ECF400A64544 /* GameplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A6C99B0A25EF70B700A64544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6C99B0D25EF70B700A64544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6C99B0F25EF70B700A64544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6C99B1925F0AD8300A64544 /* Shoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoe.swift; sourceTree = "<group>"; };
+		A6C99B1D25F2D93700A64544 /* shoe_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shoe_data.txt; path = ../../../../Documents/shoe_data.txt; sourceTree = "<group>"; };
+		A6C99B2025F2ECF400A64544 /* GameplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +65,13 @@
 				A6C99B0125EF70B500A64544 /* AppDelegate.swift */,
 				A6C99B0325EF70B500A64544 /* SceneDelegate.swift */,
 				A6C99B0525EF70B500A64544 /* ViewController.swift */,
+				A6C99B2025F2ECF400A64544 /* GameplayViewController.swift */,
+				A6C99B1925F0AD8300A64544 /* Shoe.swift */,
 				A6C99B0725EF70B500A64544 /* Main.storyboard */,
 				A6C99B0A25EF70B700A64544 /* Assets.xcassets */,
 				A6C99B0C25EF70B700A64544 /* LaunchScreen.storyboard */,
 				A6C99B0F25EF70B700A64544 /* Info.plist */,
+				A6C99B1D25F2D93700A64544 /* shoe_data.txt */,
 			);
 			path = GuessTheSneaker;
 			sourceTree = "<group>";
@@ -127,6 +136,7 @@
 				A6C99B0E25EF70B700A64544 /* LaunchScreen.storyboard in Resources */,
 				A6C99B0B25EF70B700A64544 /* Assets.xcassets in Resources */,
 				A6C99B0925EF70B500A64544 /* Main.storyboard in Resources */,
+				A6C99B1E25F2D93700A64544 /* shoe_data.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +147,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6C99B1A25F0AD8300A64544 /* Shoe.swift in Sources */,
 				A6C99B0625EF70B500A64544 /* ViewController.swift in Sources */,
 				A6C99B0225EF70B500A64544 /* AppDelegate.swift in Sources */,
+				A6C99B2125F2ECF400A64544 /* GameplayViewController.swift in Sources */,
 				A6C99B0425EF70B500A64544 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
