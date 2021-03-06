@@ -9,8 +9,10 @@ import UIKit
 
 class GameplayViewController: UIViewController {
 
+    @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var quitButton: UIBarButtonItem!
     
+    var brand: String  = ""
     
     @IBAction func quitGame(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -21,6 +23,7 @@ class GameplayViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        brandLabel?.text = brand
     }
    
     

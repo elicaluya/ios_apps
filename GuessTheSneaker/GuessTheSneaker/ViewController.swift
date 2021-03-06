@@ -9,12 +9,23 @@ import UIKit
 import SQLite3
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var adidasButton: UIButton!
+    @IBOutlet weak var ajButton: UIButton!
+    @IBOutlet weak var nikeButton: UIButton!
     
     var db: OpaquePointer?
     var shoeList = [Shoe]()
     let selectQuery = "SELECT COUNT(*) FROM ShoeTable"
     var stmt: OpaquePointer?
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let target = segue.destination as? GameplayViewController {
+            if let brand = sender as? UIButton {
+                target.brand = brand.currentTitle!
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
