@@ -15,14 +15,34 @@ class ViewController: UIViewController {
     
     var db: OpaquePointer?
     var shoeList = [Shoe]()
-    let selectQuery = "SELECT COUNT(*) FROM ShoeTable"
+    let sizeQuery = "SELECT COUNT(*) FROM ShoeTable"
     var stmt: OpaquePointer?
     
+    
+    func getShoesFromBrand(brand: String) -> Array<Shoe>{
+        let selectQuery = "SELECT * FROM ShoeTable WHERE brand = '\(brand)'"
+        if sqlite3_prepare(db, selectQuery, -1, &stmt, nil) != SQLITE_OK {
+            let errmsg = String(cString: sqlite3_errmsg(db)!)
+            print("error selecting from table: \(errmsg)")
+        }
+        
+        var list = [Shoe]()
+        while (sqlite3_step(stmt) == SQLITE_ROW){
+            let id = String(cString: sqlite3_column_text(stmt, 0))
+            let brand = String(cString: sqlite3_column_text(stmt, 1))
+            let model = String(cString: sqlite3_column_text(stmt, 2))
+            let colorway = String(cString: sqlite3_column_text(stmt, 3))
+            // add values to list
+            list.append(Shoe(id: String(id), brand: String(brand), model: String(model), colorway: String(colorway)))
+        }
+        return list
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let target = segue.destination as? GameplayViewController {
             if let brand = sender as? UIButton {
                 target.brand = brand.currentTitle!
+                target.brandList = getShoesFromBrand(brand: brand.currentTitle!)
             }
         }
     }
@@ -47,7 +67,7 @@ class ViewController: UIViewController {
         // Check if the table is empty or not
         var isEmptyTable = false
         // Select from table
-        if sqlite3_prepare(db, selectQuery, -1, &stmt, nil) != SQLITE_OK {
+        if sqlite3_prepare(db, sizeQuery, -1, &stmt, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
             print("error selecting from table: \(errmsg)")
         }

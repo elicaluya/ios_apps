@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Shoe {
+struct Shoe: Equatable {
     var id: String?
     var brand: String?
     var model: String?
