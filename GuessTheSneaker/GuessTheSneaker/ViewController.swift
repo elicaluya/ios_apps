@@ -58,6 +58,11 @@ class ViewController: UIViewController {
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
             print("error opening database")
         }
+//        // Dropping table
+//        if sqlite3_exec(db, "DROP TABLE ShoeTable", nil, nil, nil) != SQLITE_OK {
+//            let errmsg = String(cString: sqlite3_errmsg(db)!)
+//            print("error dropping table: \(errmsg)")
+//        }
         // Create table
         if sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS ShoeTable (id TEXT PRIMARY KEY, brand TEXT, model TEXT, colorway TEXT)", nil, nil, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
