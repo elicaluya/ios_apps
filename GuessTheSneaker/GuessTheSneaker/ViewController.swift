@@ -45,8 +45,24 @@ class ViewController: UIViewController {
                 target.brandList = getShoesFromBrand(brand: brand.currentTitle!)
             }
         }
+        else if let target = segue.destination as? AnswersViewController {
+            if (sender as? UIButton) != nil {
+                target.shoesList = self.shoeList
+            }
+        }
     }
     
+    @IBAction func displayRules(_ sender: UIBarButtonItem) {
+        let title = "Rules:"
+        var message = "1) Pick a Brand you want to choose from (Adidas, Air Jordan, Nike)\n"
+        message += "2) Choose the model and colorway from the picker for your answer\n"
+        message += "3) Press Submit and confirm or cancel your choice\n"
+        message += "4) If you get 10 correct you win the game. 3 incorrect choices means you lose"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okayAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

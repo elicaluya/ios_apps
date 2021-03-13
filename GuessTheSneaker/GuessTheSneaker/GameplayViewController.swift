@@ -24,7 +24,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var colorwayList = [String]()
     var correct_count = 0
     var wrong_count = 0
-    var didWin = false
+
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -114,7 +114,6 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     // Reset Game by setting values back to 0 and clearing the current shoes list
     func resetGame(){
         currentShoes.removeAll()
-        didWin = false
         loadGame()
         correct_count = 0
         correct_counter.text = String(0)
@@ -144,12 +143,11 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         // Checking end game
         if correct_count == 10 {
-            didWin = true
-            performSegue(withIdentifier: "GameEnded", sender: nil)
+            performSegue(withIdentifier: "WinGame", sender: nil)
             resetGame()
         }
-        if wrong_count == 3 {
-            performSegue(withIdentifier: "GameEnded", sender: nil)
+        else if wrong_count == 3 {
+            performSegue(withIdentifier: "LoseGame", sender: nil)
             resetGame()
         }
         else {
@@ -181,14 +179,6 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         dismiss(animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GameEnded" {
-            if let target = segue.destination as? WinLoseViewController {
-                target.didWin = didWin
-            }
-        }
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,6 +201,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
 }
 
+// Need this extension in order to pull images from online resource
 extension UIImageView {
     func load(url: URL){
         DispatchQueue.global().async { [weak self] in

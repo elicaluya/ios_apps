@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A641E03F25FC3868005065B3 /* WinLoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A641E03E25FC3868005065B3 /* WinLoseViewController.swift */; };
+		A641E04225FC4F4F005065B3 /* AnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A641E04125FC4F4F005065B3 /* AnswersViewController.swift */; };
 		A6C99B0225EF70B500A64544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C99B0125EF70B500A64544 /* AppDelegate.swift */; };
 		A6C99B0425EF70B500A64544 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C99B0325EF70B500A64544 /* SceneDelegate.swift */; };
 		A6C99B0625EF70B500A64544 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C99B0525EF70B500A64544 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		A641E03E25FC3868005065B3 /* WinLoseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinLoseViewController.swift; sourceTree = "<group>"; };
+		A641E04125FC4F4F005065B3 /* AnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewController.swift; sourceTree = "<group>"; };
 		A6C99AFE25EF70B500A64544 /* GuessTheSneaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessTheSneaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C99B0125EF70B500A64544 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6C99B0325EF70B500A64544 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				A6C99B2025F2ECF400A64544 /* GameplayViewController.swift */,
 				A6C99B1925F0AD8300A64544 /* Shoe.swift */,
 				A6C99B0725EF70B500A64544 /* Main.storyboard */,
+				A641E04125FC4F4F005065B3 /* AnswersViewController.swift */,
 				A641E03E25FC3868005065B3 /* WinLoseViewController.swift */,
 				A6C99B0A25EF70B700A64544 /* Assets.xcassets */,
 				A6C99B0C25EF70B700A64544 /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 				A6C99B0625EF70B500A64544 /* ViewController.swift in Sources */,
 				A6C99B0225EF70B500A64544 /* AppDelegate.swift in Sources */,
 				A6C99B2125F2ECF400A64544 /* GameplayViewController.swift in Sources */,
+				A641E04225FC4F4F005065B3 /* AnswersViewController.swift in Sources */,
 				A6C99B0425EF70B500A64544 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

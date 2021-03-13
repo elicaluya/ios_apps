@@ -9,9 +9,9 @@ import UIKit
 
 class WinLoseViewController: UIViewController {
 
-    @IBOutlet weak var win_lose_label: UILabel!
+    @IBOutlet weak var lose_label: UILabel!
+    @IBOutlet weak var win_label: UILabel!
     
-    var didWin = false
     
     @IBAction func restart(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -25,19 +25,13 @@ class WinLoseViewController: UIViewController {
         top.dismiss(animated: true, completion: nil)
     }
     
-    func checkWin(){
-        if didWin == true {
-            win_lose_label.text = "You Win!"
-            self.view.backgroundColor = UIColor.green
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         definesPresentationContext = true
-        checkWin()
+        
     }
     
 
