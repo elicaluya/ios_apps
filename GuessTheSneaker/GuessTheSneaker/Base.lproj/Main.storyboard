@@ -132,6 +132,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Correct:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nr-JX-Gt6">
+                                <rect key="frame" x="52" y="41" width="72" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDk-iX-oRy">
+                                <rect key="frame" x="132" y="41" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUh-UV-u32">
+                                <rect key="frame" x="337" y="41" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wrong:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNY-gR-c5R">
+                                <rect key="frame" x="265" y="41" width="64" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w44-S1-PHq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -139,14 +167,71 @@
                     <navigationItem key="navigationItem" id="BzT-YJ-Vl7"/>
                     <connections>
                         <outlet property="brandLabel" destination="Tc0-9x-ieB" id="Hxm-ZR-iUc"/>
+                        <outlet property="correct_counter" destination="qDk-iX-oRy" id="Qc4-uz-mTB"/>
                         <outlet property="picker" destination="DeF-KA-GkF" id="pP1-9A-APl"/>
                         <outlet property="quitButton" destination="lNZ-aU-Egu" id="hnp-Y9-qro"/>
                         <outlet property="shoeImage" destination="MIU-3n-vqf" id="i2l-qF-yDR"/>
+                        <outlet property="wrong_counter" destination="nUh-UV-u32" id="MMn-au-xr8"/>
+                        <segue destination="i9l-ng-A2V" kind="show" identifier="GameEnded" id="O8z-6r-dr7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgr-or-A1S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1173.913043478261" y="83.705357142857139"/>
+        </scene>
+        <!--Win Lose View Controller-->
+        <scene sceneID="4P4-5o-low">
+            <objects>
+                <viewController id="i9l-ng-A2V" customClass="WinLoseViewController" customModule="GuessTheSneaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KWF-ce-PoU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="033-MZ-CY0">
+                                <rect key="frame" x="68" y="453" width="96" height="46"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="restart:" destination="i9l-ng-A2V" eventType="touchUpInside" id="buA-Ar-0no"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbo-KN-aW7">
+                                <rect key="frame" x="208" y="453" width="143" height="46"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <state key="normal" title="Main Menu"/>
+                                <connections>
+                                    <action selector="mainMenu:" destination="i9l-ng-A2V" eventType="touchUpInside" id="dmr-69-CxA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Lose!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-CH-XXa">
+                                <rect key="frame" x="117" y="218" width="180" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qDl-ix-c4Y"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <constraints>
+                            <constraint firstItem="qDl-ix-c4Y" firstAttribute="trailing" secondItem="dbo-KN-aW7" secondAttribute="trailing" constant="63" id="6iH-vI-F8C"/>
+                            <constraint firstItem="dbo-KN-aW7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="033-MZ-CY0" secondAttribute="trailing" constant="8" symbolic="YES" id="B3C-Xw-Frd"/>
+                            <constraint firstItem="qDl-ix-c4Y" firstAttribute="bottom" secondItem="033-MZ-CY0" secondAttribute="bottom" constant="309" id="Esl-Df-Pur"/>
+                            <constraint firstItem="qDl-ix-c4Y" firstAttribute="trailing" secondItem="2TV-CH-XXa" secondAttribute="trailing" constant="117" id="K6N-w2-flY"/>
+                            <constraint firstItem="033-MZ-CY0" firstAttribute="top" secondItem="2TV-CH-XXa" secondAttribute="bottom" constant="206" id="OCS-dF-vQv"/>
+                            <constraint firstItem="033-MZ-CY0" firstAttribute="leading" secondItem="qDl-ix-c4Y" secondAttribute="leading" constant="68" id="Ofe-FF-9P8"/>
+                            <constraint firstItem="2TV-CH-XXa" firstAttribute="top" secondItem="qDl-ix-c4Y" secondAttribute="top" constant="218" id="R5I-4g-rjZ"/>
+                            <constraint firstItem="dbo-KN-aW7" firstAttribute="centerY" secondItem="033-MZ-CY0" secondAttribute="centerY" id="ZFz-mh-PDg"/>
+                            <constraint firstItem="2TV-CH-XXa" firstAttribute="leading" secondItem="qDl-ix-c4Y" secondAttribute="leading" constant="117" id="zeh-yW-i0j"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="oHN-Tz-Nh1"/>
+                    <connections>
+                        <outlet property="win_lose_label" destination="2TV-CH-XXa" id="V2h-Sz-8wX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FVM-1V-5h9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2269.5652173913045" y="107.8125"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -155,6 +240,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

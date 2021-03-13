@@ -109,33 +109,6 @@ class ViewController: UIViewController {
                 print("error inserting into table: \(errmsg)")
             }
         }
-        
-//        // Load data into table if the table is empty
-//        if sqlite3_exec(db, "BULK INSERT ShoeTable FROM 'shoe_list.txt' WITH (FIELDTERMINATOR = ',',ROWTERMINATOR = '\n') GO", nil, nil, nil) != SQLITE_OK {
-//            let errmsg = String(cString: sqlite3_errmsg(db)!)
-//            print("error creating table: \(errmsg)")
-//        }
-//        // Select from table
-//        if sqlite3_prepare(db, selectQuery, -1, &stmt, nil) != SQLITE_OK {
-//            let errmsg = String(cString: sqlite3_errmsg(db)!)
-//            print("error selecting from table: \(errmsg)")
-//        }
-//        // Traversing through all the records
-//        while (sqlite3_step(stmt) == SQLITE_ROW){
-//            let id = String(cString: sqlite3_column_text(stmt, 0))
-//            let brand = String(cString: sqlite3_column_text(stmt, 1))
-//            let model = String(cString: sqlite3_column_text(stmt, 2))
-//            let colorway = String(cString: sqlite3_column_text(stmt, 3))
-//            // add values to list
-//            shoeList.append(Shoe(id: String(id), brand: String(brand), model: String(model), colorway: String(colorway)))
-//        }
-//        // Reading through list and displaying the item
-//        var text = ""
-//        for i in 0..<shoeList.count {
-//            let item: Shoe = shoeList[i]
-//            text += "id = \(item.id!) brand = \(item.brand!) model = \(item.model!) cw = \(item.colorway!)"
-//        }
-//        testText.text = text
     }
 
 

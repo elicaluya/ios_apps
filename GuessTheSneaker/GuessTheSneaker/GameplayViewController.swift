@@ -9,6 +9,8 @@ import UIKit
 
 class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var correct_counter: UILabel!
+    @IBOutlet weak var wrong_counter: UILabel!
     @IBOutlet weak var shoeImage: UIImageView!
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var brandLabel: UILabel!
@@ -17,11 +19,12 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var brand: String  = ""
     var brandList = [Shoe]()
     var currentShoes = [Shoe]()
-    var currentIndex: Int = 0
     let urlString = "https://shoe-images-ios.s3-us-west-1.amazonaws.com"
     var modelList = [String]()
     var colorwayList = [String]()
-    
+    var correct_count = 0
+    var wrong_count = 0
+    var didWin = false
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -78,6 +81,8 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     // Populate the lists for the pickers with the correct answer and wrong choices
     func populateLists(currentShoe: Shoe) {
+        modelList.removeAll()
+        colorwayList.removeAll()
         modelList.append(currentShoe.model!)
         colorwayList.append(currentShoe.colorway!)
         
@@ -96,6 +101,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         modelList.shuffle()
         colorwayList.shuffle()
+        picker.reloadAllComponents()
     }
     
     // Load game by displaying the current image of a random shoe and populating lists with correct and incorrect choices
@@ -105,14 +111,66 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         populateLists(currentShoe: shoe)
     }
     
+    // Reset Game by setting values back to 0 and clearing the current shoes list
+    func resetGame(){
+        currentShoes.removeAll()
+        didWin = false
+        loadGame()
+        correct_count = 0
+        correct_counter.text = String(0)
+        wrong_count = 0
+        wrong_counter.text = String(0)
+    }
+    
+    
+    func checkAnswer(model: String, colorway: String){
+        let correct_model = currentShoes.last?.model
+        let correct_cw = currentShoes.last?.colorway
+        
+        var title = ""
+        var message = ""
+        if correct_model == model && correct_cw == colorway {
+            title = "Correct!"
+            message = "You picked the correct answer!"
+            correct_count += 1
+            correct_counter.text = String(correct_count)
+        }
+        else {
+            title = "Wrong!"
+            message = "You picked the wrong answer!"
+            wrong_count += 1
+            wrong_counter.text = String(wrong_count)
+        }
+        
+        // Checking end game
+        if correct_count == 10 {
+            didWin = true
+            performSegue(withIdentifier: "GameEnded", sender: nil)
+            resetGame()
+        }
+        if wrong_count == 3 {
+            performSegue(withIdentifier: "GameEnded", sender: nil)
+            resetGame()
+        }
+        else {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okayAction)
+            present(alertController, animated: true, completion: { self.loadGame() })
+        }
+    }
+    
     @IBAction func submit(_ sender: UIButton) {
         let title = "Chosen Shoe:"
-        let message = "You have selected \(modelList[picker.selectedRow(inComponent: 0)]) and \(colorwayList[picker.selectedRow(inComponent: 1)])"
+        let model_choice = modelList[picker.selectedRow(inComponent: 0)]
+        let cw_choice = colorwayList[picker.selectedRow(inComponent: 1)]
+        let message = "Choose \(model_choice) and \(cw_choice)?"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        let okayAction = UIAlertAction(title: "Confirm", style: .default, handler: nil)
-        alertController.addAction(cancelAction
-        )
+        let okayAction = UIAlertAction(title: "Confirm", style: .default, handler: { action in
+            self.checkAnswer(model: model_choice, colorway: cw_choice)
+        })
+        alertController.addAction(cancelAction)
         alertController.addAction(okayAction)
         present(alertController, animated: true, completion: nil)
     }
@@ -123,15 +181,21 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         dismiss(animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GameEnded" {
+            if let target = segue.destination as? WinLoseViewController {
+                target.didWin = didWin
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         brandLabel?.text = brand
-        currentShoes.removeAll()
-        currentIndex = 0
-        loadGame()
+        resetGame()
     }
    
     
