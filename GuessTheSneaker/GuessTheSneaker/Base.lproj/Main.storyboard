@@ -125,6 +125,15 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPK-ei-FUH">
+                                <rect key="frame" x="177" y="687" width="61" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Show"/>
+                                <connections>
+                                    <action selector="showShoe:" destination="AAg-ON-Di3" eventType="touchUpInside" id="dd9-NH-4s0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ayh-Kp-SXQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

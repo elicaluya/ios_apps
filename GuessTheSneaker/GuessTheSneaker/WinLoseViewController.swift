@@ -13,10 +13,12 @@ class WinLoseViewController: UIViewController {
     @IBOutlet weak var win_label: UILabel!
     
     
+    // Will close the window to a resest game of the same brand
     @IBAction func restart(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
+    // Return to the main menu to choose another brand
     @IBAction func mainMenu(_ sender: UIButton) {
         var top: UIViewController = self;
         while top.presentingViewController != nil {
@@ -30,8 +32,6 @@ class WinLoseViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        definesPresentationContext = true
-        
     }
     
 

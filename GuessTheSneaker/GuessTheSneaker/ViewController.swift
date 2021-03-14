@@ -13,19 +13,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var ajButton: UIButton!
     @IBOutlet weak var nikeButton: UIButton!
     
+    
+    // Need OpaquePointers for SQLite functionality
     var db: OpaquePointer?
-    var shoeList = [Shoe]()
-    let sizeQuery = "SELECT COUNT(*) FROM ShoeTable"
     var stmt: OpaquePointer?
     
     
+    // Function to get shoes from a specific brand or all shoes
     func getShoesFromBrand(brand: String) -> Array<Shoe>{
-        let selectQuery = "SELECT * FROM ShoeTable WHERE brand = '\(brand)'"
+        var selectQuery = "SELECT * FROM ShoeTable WHERE brand = '\(brand)'"
+        // If paramter is empty string, get all of the shoes
+        if brand.count == 0 {
+            selectQuery = "SELECT * FROM ShoeTable"
+        }
+        
         if sqlite3_prepare(db, selectQuery, -1, &stmt, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
             print("error selecting from table: \(errmsg)")
         }
         
+        // Return a list of shoe objects
         var list = [Shoe]()
         while (sqlite3_step(stmt) == SQLITE_ROW){
             let id = String(cString: sqlite3_column_text(stmt, 0))
@@ -38,20 +45,22 @@ class ViewController: UIViewController {
         return list
     }
     
+    // Prepare data for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // if going to Gameplay, send the brand and list of shoes of that specific brand
         if let target = segue.destination as? GameplayViewController {
             if let brand = sender as? UIButton {
                 target.brand = brand.currentTitle!
                 target.brandList = getShoesFromBrand(brand: brand.currentTitle!)
             }
         }
+        // Otherwise, send all the shoes for the answers
         else if let target = segue.destination as? AnswersViewController {
-            if (sender as? UIButton) != nil {
-                target.shoesList = self.shoeList
-            }
+            target.shoesList = getShoesFromBrand(brand: "")
         }
     }
     
+    // Function to display rules to user as an alert
     @IBAction func displayRules(_ sender: UIBarButtonItem) {
         let title = "Rules:"
         var message = "1) Pick a Brand you want to choose from (Adidas, Air Jordan, Nike)\n"
@@ -74,7 +83,7 @@ class ViewController: UIViewController {
         if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
             print("error opening database")
         }
-//        // Dropping table
+//        // Dropping table for testing purposes
 //        if sqlite3_exec(db, "DROP TABLE ShoeTable", nil, nil, nil) != SQLITE_OK {
 //            let errmsg = String(cString: sqlite3_errmsg(db)!)
 //            print("error dropping table: \(errmsg)")
@@ -88,11 +97,12 @@ class ViewController: UIViewController {
         // Check if the table is empty or not
         var isEmptyTable = false
         // Select from table
-        if sqlite3_prepare(db, sizeQuery, -1, &stmt, nil) != SQLITE_OK {
+        if sqlite3_prepare(db, "SELECT COUNT(*) FROM ShoeTable", -1, &stmt, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(db)!)
             print("error selecting from table: \(errmsg)")
         }
         
+        // If you get an empty result, then the table is empty and needs to be populated
         while (sqlite3_step(stmt) == SQLITE_ROW){
             let numRows = sqlite3_column_int(stmt, 0)
             if numRows == 0 {
@@ -100,7 +110,7 @@ class ViewController: UIViewController {
             }
         }
         
-        // Only populate the table if it is empty
+        // Only populate the table if it is empty (Usually on first installation of device)
         if isEmptyTable {
             print("New table, populating with data")
             // Load data in from txt file
@@ -110,23 +120,17 @@ class ViewController: UIViewController {
                     let myStrings = data.components(separatedBy: "\r\n")
                     for i in 0..<myStrings.count-1 {
                         let shoes = myStrings[i].components(separatedBy: ",")
-                        shoeList.append(Shoe(id: shoes[0], brand: shoes[1], model: shoes[2], colorway: shoes[3]))
+                        // Insert into table
+                        if sqlite3_exec(db, "INSERT INTO ShoeTable VALUES ('\(shoes[0])', '\(shoes[1])', '\(shoes[2])', '\(shoes[3])')", nil, nil, nil) != SQLITE_OK {
+                            let errmsg = String(cString: sqlite3_errmsg(db)!)
+                            print("error inserting into table: \(errmsg)")
+                        }
                     }
                 } catch {
                     print(error)
                 }
             }
         }
-        
-        for i in 0..<shoeList.count {
-            // Insert into table
-            if sqlite3_exec(db, "INSERT INTO ShoeTable VALUES ('\(shoeList[i].id!)', '\(shoeList[i].brand!)', '\(shoeList[i].model!)', '\(shoeList[i].colorway!)')", nil, nil, nil) != SQLITE_OK {
-                let errmsg = String(cString: sqlite3_errmsg(db)!)
-                print("error inserting into table: \(errmsg)")
-            }
-        }
     }
-
-
 }
 

@@ -16,20 +16,29 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var quitButton: UIBarButtonItem!
     
+    
+    // String of brand to display on page
     var brand: String  = ""
+    // List to hold all shoes of a certain brand
     var brandList = [Shoe]()
+    // List to hold shoes that have already been displayed
     var currentShoes = [Shoe]()
+    // url for pulling shoes from aws s3 bucket
     let urlString = "https://shoe-images-ios.s3-us-west-1.amazonaws.com"
+    // Lists for holding models and colorways for picker
     var modelList = [String]()
     var colorwayList = [String]()
+    // Counts to keep track of correct and wrong choices
     var correct_count = 0
     var wrong_count = 0
 
     
+    // Specify 2 components for model and colorway
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
+    // Specifying list size for each component
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return modelList.count
@@ -38,6 +47,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+    // Specifying what list to pull from depending on component
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return modelList[row]
@@ -46,6 +56,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+    // Specifying how to display text in the picker
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let v = view {
@@ -69,7 +80,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         shoeImage.load(url: URL(string: imgURL)!)
     }
     
-    // Function to get a random shoe not already picked and add it to the list
+    // Function to get a random shoe not already picked and add it to the currentShoes list
     func getRandShoe() -> Shoe {
         var shoe = brandList.randomElement()!
         while currentShoes.contains(shoe) {
@@ -81,14 +92,19 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     // Populate the lists for the pickers with the correct answer and wrong choices
     func populateLists(currentShoe: Shoe) {
+        // Clear list to fill with new data
         modelList.removeAll()
         colorwayList.removeAll()
+        // FIrst add the current shoe's data to the model and colorway list
         modelList.append(currentShoe.model!)
         colorwayList.append(currentShoe.colorway!)
         
+        // Choose random model and colorway to put into list
         var randBrand = brandList.randomElement()?.model
         var randColorway = brandList.randomElement()?.colorway
+        // Need 2 other random choices
         for _ in 0...1 {
+            // If the random choice is in the list, get another random element
             while modelList.contains(randBrand!){
                 randBrand = brandList.randomElement()?.model
             }
@@ -99,6 +115,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
             colorwayList.append(randColorway!)
         }
+        // Randomize the order of choices in the lists and reflect the changes in the picker
         modelList.shuffle()
         colorwayList.shuffle()
         picker.reloadAllComponents()
@@ -121,13 +138,14 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         wrong_counter.text = String(0)
     }
     
-    
+    // Checking the answer given by the user and if game is over or not
     func checkAnswer(model: String, colorway: String){
         let correct_model = currentShoes.last?.model
         let correct_cw = currentShoes.last?.colorway
         
         var title = ""
         var message = ""
+        // model and colorway both need to match in order for answer to be correct
         if correct_model == model && correct_cw == colorway {
             title = "Correct!"
             message = "You picked the correct answer!"
@@ -151,6 +169,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
             resetGame()
         }
         else {
+            // Display message if not end game
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let okayAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alertController.addAction(okayAction)
@@ -158,11 +177,13 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
+    // Submit the user's choices
     @IBAction func submit(_ sender: UIButton) {
         let title = "Chosen Shoe:"
         let model_choice = modelList[picker.selectedRow(inComponent: 0)]
         let cw_choice = colorwayList[picker.selectedRow(inComponent: 1)]
         let message = "Choose \(model_choice) and \(cw_choice)?"
+        // User has option to confirm or cancel their choice
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         let okayAction = UIAlertAction(title: "Confirm", style: .default, handler: { action in
@@ -173,7 +194,7 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         present(alertController, animated: true, completion: nil)
     }
     
-    
+    // Return to main menu
     @IBAction func quitGame(_ sender: UIBarButtonItem) {
         currentShoes.removeAll()
         dismiss(animated: true, completion: nil)
@@ -184,6 +205,8 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Set brand label to corresponding brand and set default values for the game
         brandLabel?.text = brand
         resetGame()
     }
@@ -202,6 +225,8 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
 }
 
 // Need this extension in order to pull images from online resource
+// Will display error in console: nw_protocol_get_quic_image_block_invoke dlopen libquic failed
+// Researched online and was advised to ignore error as it is a bug
 extension UIImageView {
     func load(url: URL){
         DispatchQueue.global().async { [weak self] in
