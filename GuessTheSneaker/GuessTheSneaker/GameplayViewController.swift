@@ -31,6 +31,10 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
     // Counts to keep track of correct and wrong choices
     var correct_count = 0
     var wrong_count = 0
+    // Limits for the pinch to zoom
+    var recognizerScale:CGFloat = 1.0
+    let maxScale:CGFloat = 1.5
+    let minScale:CGFloat = 0.8
 
     
     // Specify 2 components for model and colorway
@@ -200,12 +204,28 @@ class GameplayViewController: UIViewController, UIPickerViewDataSource, UIPicker
         dismiss(animated: true, completion: nil)
     }
     
+    // Function for pinch to zoom
+    @objc func pinchGesture(sender: UIPinchGestureRecognizer){
+        guard sender.view != nil else {return}
+        
+        if sender.state == .began || sender.state == .changed {
+            if (recognizerScale < maxScale && sender.scale > 1.0) || (recognizerScale > minScale && sender.scale < 1.0) {
+                sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
+                recognizerScale *= sender.scale
+                sender.scale = 1.0
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        // For pinch to zoom functionality
+        shoeImage.isUserInteractionEnabled = true
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        shoeImage.addGestureRecognizer(pinchGesture)
         // Set brand label to corresponding brand and set default values for the game
         brandLabel?.text = brand
         resetGame()

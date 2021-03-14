@@ -14,6 +14,10 @@ class AnswersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // shoesList will hold all of the shoe objects from the data
     var shoesList = [Shoe]()
     let urlString = "https://shoe-images-ios.s3-us-west-1.amazonaws.com"
+    // Limits for the pinch to zoom
+    var recognizerScale:CGFloat = 1.0
+    let maxScale:CGFloat = 1.5
+    let minScale:CGFloat = 0.8
     
     
     // Specify one component for the picker
@@ -67,10 +71,28 @@ class AnswersViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         dismiss(animated: true, completion: nil)
     }
     
+    // Function for pinch to zoom
+    @objc func pinchGesture(sender: UIPinchGestureRecognizer){
+        guard sender.view != nil else {return}
+        
+        if sender.state == .began || sender.state == .changed {
+            if (recognizerScale < maxScale && sender.scale > 1.0) || (recognizerScale > minScale && sender.scale < 1.0) {
+                sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
+                recognizerScale *= sender.scale
+                sender.scale = 1.0
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // For pinch to zoom functionality
+        shoeImage.isUserInteractionEnabled = true
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        shoeImage.addGestureRecognizer(pinchGesture)
+        // Display the first shoe in the shoe list
         displayShoe(shoe: shoesList.first!)
         self.shoePicker.delegate = self
         self.shoePicker.dataSource = self
